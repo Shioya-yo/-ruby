@@ -2,22 +2,34 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>X Clone Project</title>
+    <title>rubyの実験</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">ホーム</div>
-        <div class="post-form">
-            <div class="flex">
-                <div class="avatar"></div>
-                <textarea id="messageInput" placeholder="いまどうしてる？"></textarea>
-            </div>
-            <div class="form-footer">
-                <button onclick="postMessage()" id="postBtn">ポストする</button>
+    <div class="main-layout">
+        <div class="left-sidebar">
+            <div class="profile-card">
+                <div id="mainAvatar" class="avatar-main"></div>
+                <h2 id="mainName">名前変えれます</h2>
+                <a href="settings.html" class="edit-link">プロフィールを編集</a>
             </div>
         </div>
-        <div id="posts"></div>
+
+        <div class="timeline">
+            <div class="header">rubyの実験</div>
+            <div class="post-box">
+                <textarea id="messageInput" placeholder="試しに投稿してみて"></textarea>
+                
+                <img id="postImgPreview" style="display:none; width:100%; border-radius:10px; margin-bottom:10px; border: 1px solid #ddd;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label style="cursor: pointer; color: #1d9bf0; font-size: 22px;">
+                        🖼️ <input type="file" id="postFileInput" accept="image/*" style="display:none;" onchange="previewPostImage()">
+                    </label>
+                    <button onclick="postMessage()" class="post-btn">ポスト</button>
+                </div>
+            </div>
+            <div id="posts"></div>
+        </div>
     </div>
     <script src="app.js"></script>
 </body>
