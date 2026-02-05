@@ -2,20 +2,13 @@ require 'sinatra'
 require 'json'
 require 'securerandom'
 
-# publicフォルダを有効にする
 set :public_folder, 'public'
 
-# 【重要】http://localhost:4567/ にアクセスした時に index.html を開く設定
+def load_posts; File.exist?('data.json') ? JSON.parse(File.read('data.json')) : []; end
+def save_posts(posts); File.write('data.json', JSON.generate(posts)); end
+
 get '/' do
   send_file File.join(settings.public_folder, 'index.html')
-end
-
-def load_posts
-  File.exist?('data.json') ? JSON.parse(File.read('data.json')) : []
-end
-
-def save_posts(posts)
-  File.write('data.json', JSON.generate(posts))
 end
 
 get '/posts' do
@@ -28,21 +21,20 @@ post '/posts' do
   posts = load_posts
   new_post = {
     id: SecureRandom.hex(8),
-    name: "Rubyエンジニア",
-    handle: "@ruby_lan",
+    name: body['name'],
+    avatar: body['avatar'],
     text: body['text'],
-    time: Time.now.strftime("%H:%M"),
-    likes: 0
+    postImage: body['postImage'],
+    time: Time.now.strftime("%H:%M")
   }
   posts.unshift(new_post)
   save_posts(posts)
   status 201
 end
 
-post '/posts/:id/like' do
+delete '/posts/:id' do
   posts = load_posts
-  post = posts.find { |p| p['id'] == params[:id] }
-  post['likes'] += 1 if post
+  posts.reject! { |p| p['id'] == params[:id] }
   save_posts(posts)
   status 200
 end
