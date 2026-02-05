@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>設定 | rubyの実験</title>
+    <style>
+        body { font-family: sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .settings-card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 100%; max-width: 350px; text-align: center; }
+        .preview { width: 120px; height: 120px; border-radius: 50%; background: #eee; margin: 0 auto 10px; background-size: cover; background-position: center; border: 3px solid #1d9bf0; }
+        .del-btn { color: #ff4444; cursor: pointer; font-size: 13px; display: inline-block; margin-bottom: 20px; }
+        input[type="text"] { width: 90%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 10px; font-size: 16px; }
+        .save-btn { background: #1d9bf0; color: white; border: none; padding: 12px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="settings-card">
+        <a href="index.html" style="color: #1d9bf0; text-decoration: none; font-size: 14px;">← ホームへ戻る</a>
+        <h2>プロフィール編集</h2>
+        <div id="imgPreview" class="preview"></div>
+        <span class="del-btn" onclick="removePhoto()">画像を削除</span><br>
+        <input type="file" id="fileInput" accept="image/*" onchange="previewImage()">
+        <input type="text" id="nameEdit" placeholder="名前を入力">
+        <button onclick="saveAll()" class="save-btn">保存して戻る</button>
+    </div>
+
+    <script>
+        let base64Image = localStorage.getItem('userAvatar') || "";
+        document.getElementById('nameEdit').value = localStorage.getItem('userName') || "名前変えれます";
+        if(base64Image) document.getElementById('imgPreview').style.backgroundImage = `url(${base64Image})`;
+
+        function previewImage() {
+            const file = document.getElementById('fileInput').files[0];
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                base64Image = reader.result;
+                document.getElementById('imgPreview').style.backgroundImage = `url(${base64Image})`;
+            };
+            if (file) reader.readAsDataURL(file);
+        }
+
+        function removePhoto() {
+            base64Image = "";
+            document.getElementById('imgPreview').style.backgroundImage = `none`;
+            document.getElementById('fileInput').value = "";
+        }
+
+        function saveAll() {
+            localStorage.setItem('userName', document.getElementById('nameEdit').value);
+            localStorage.setItem('userAvatar', base64Image);
+            location.href = "index.html";
+        }
+    </script>
+</body>
+</html>
