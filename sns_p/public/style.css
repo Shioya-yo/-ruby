@@ -1,0 +1,17 @@
+body { font-family: sans-serif; background: #fff; margin: 0; display: flex; justify-content: center; color: #0f1419; }
+.container { width: 100%; max-width: 600px; border-left: 1px solid #eff3f4; border-right: 1px solid #eff3f4; min-height: 100vh; }
+.header { font-size: 20px; font-weight: bold; padding: 15px; position: sticky; top: 0; background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #eff3f4; }
+.post-form { padding: 15px; border-bottom: 1px solid #eff3f4; }
+.flex { display: flex; gap: 12px; }
+.avatar { width: 48px; height: 48px; background: #cfd9de; border-radius: 50%; flex-shrink: 0; }
+textarea { width: 100%; border: none; font-size: 20px; outline: none; resize: none; margin-top: 10px; }
+.form-footer { display: flex; justify-content: flex-end; padding-top: 10px; }
+button { background: #1d9bf0; color: white; border: none; padding: 10px 20px; border-radius: 30px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+button:hover { background: #1a8cd8; }
+.card { padding: 15px; border-bottom: 1px solid #eff3f4; display: flex; gap: 12px; animation: fadeIn 0.3s; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.name { font-weight: bold; }
+.handle, .time { color: #536471; font-size: 15px; }
+.text { font-size: 15px; line-height: 1.5; margin-top: 2px; }
+.like-btn { margin-top: 12px; color: #536471; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
+.like-btn:hover { color: #f91880; }

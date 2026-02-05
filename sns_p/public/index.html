@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>X Clone Project</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">ホーム</div>
+        <div class="post-form">
+            <div class="flex">
+                <div class="avatar"></div>
+                <textarea id="messageInput" placeholder="いまどうしてる？"></textarea>
+            </div>
+            <div class="form-footer">
+                <button onclick="postMessage()" id="postBtn">ポストする</button>
+            </div>
+        </div>
+        <div id="posts"></div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
